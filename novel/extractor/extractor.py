@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 Create On 2018-1-13
 
@@ -23,8 +23,8 @@ class Extractor:
         self.reScript = re.compile(
             r'<\s*script[^>]*>[\w\W]*?<\s*/\s*script\s*>', re.I)
         # Style
-        self.reStyle = re.compile(
-            r'<\s*style[^>]*>[^<]*<\s*/\s*style\s*>', re.I)
+        self.reStyle = re.compile(r'<\s*style[^>]*>[^<]*<\s*/\s*style\s*>',
+                                  re.I)
         # HTML Tag
         self.reTag = re.compile(r'<[\s\S]*?>')
         # Special charcaters
@@ -94,7 +94,7 @@ class Extractor:
             block_len = block_len + len(self.textLines[i])
         self.blocksLen.append(block_len)
 
-        if(self.blockSize != self.blockSize):
+        if (self.blockSize != self.blockSize):
             return
 
         for i in range(1, text_line_count - self.blockSize):
@@ -149,6 +149,6 @@ if __name__ == '__main__':
             filename = args[2]
         f = open(filename, 'w')
         text = ext.get_plain_text(
-            'http://www.biquga.com/12_12251/15331919.html')
+            'https://www.cnblogs.com/ivictor/p/4834864.html')
         print(text)
         f.close
