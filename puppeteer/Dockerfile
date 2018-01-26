@@ -11,13 +11,16 @@ RUN apk update && apk upgrade && \
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
-# yarn set registry to taobao
-RUN yarn config set registry https://registry.npm.taobao.org -g
 # Puppeteer v0.11.0 works with Chromium 63.
-RUN yarn add puppeteer
+RUN yarn global add puppeteer@0.11.0
+
+VOLUME /workspace
 
 # Add user so we don't need --no-sandbox.
 RUN addgroup -S pptruser && adduser -S -g pptruser pptruser \
   && mkdir -p /home/pptruser/Downloads \
   && chown -R pptruser:pptruser /home/pptruser \
-  && chown -R pptruser:pptruser /app
+  && chown -R pptruser:pptruser /workspace
+
+# Run everything after as non-privileged user.
+USER pptruser

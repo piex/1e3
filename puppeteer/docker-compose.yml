@@ -3,8 +3,11 @@ services:
 
   puppeteer:
     build: ./
+    container_name: puppeteer
     restart: always
     volumes:
       - type: bind
         source: ./
         target: /workspace
+    stdin_open: true
+    tty: true
